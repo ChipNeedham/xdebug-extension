@@ -82,7 +82,8 @@ Once installed, you can:
 - Toggle profiling with a shortcut (default: <kbd>Alt</kbd>+<kbd>V</kbd>) or from the popup menu.
 - Toggle tracing with a shortcut (default: <kbd>Alt</kbd>+<kbd>B</kbd>) or from the popup menu.
 - Click the extension icon to open the popup menu and select a debugging state: Debug, Profile, Trace, or Disable.
-- Clink the "options" link in the popup to configure the IDE key, profile trigger, and trace trigger. Alternatively, right click the extension icon and choose "Options".
+- Click the "options" link in the popup to configure the IDE key, profile trigger, and trace trigger. Alternatively, right click the extension icon and choose "Options".
+- Enable the "Allow subdomains" checkbox in the options to set the cookie domain with a leading dot (e.g., `.example.com` instead of `example.com`), allowing the Xdebug cookie to work across all subdomains.
 
 ### Custom shortcuts
 
