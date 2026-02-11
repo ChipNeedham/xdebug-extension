@@ -3,14 +3,19 @@ const DEFAULT_TRIGGER_VALUE = 'YOUR-NAME';
 const getCookie = name =>
     decodeURIComponent(document.cookie.split(';').find(cookie => cookie.trim().startsWith(`${name}=`))?.split('=')[1]);
 
-const setCookie = (name, value, days = 365) =>
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString()};path=/;domain=${getDomainForCookie()}`;
+const setCookie = (name, value, days = 365) => {
+    chrome.storage.local.get({ allowSubdomains: false }, (settings) => {
+        const domain = getDomainForCookie(settings.allowSubdomains);
+        document.cookie = `${name}=${encodeURIComponent(value)};expires=${new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString()};path=/;domain=${domain}`;
+    });
+};
 
-const getDomainForCookie = () => {
+const getDomainForCookie = (allowSubdomains) => {
   const parts = window.location.hostname.split(".");
-  return parts.length <= 1 ? 
+  const domain = parts.length <= 1 ?
     window.location.hostname:
     parts.slice(-2).join(".");
+  return allowSubdomains ? `.${domain}` : domain;
 };
 
 const getStatusMap = (settings) => {

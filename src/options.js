@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const debugTriggerInput = document.getElementById('debugtrigger');
     const traceTriggerInput = document.getElementById('tracetrigger');
     const profileTriggerInput = document.getElementById('profiletrigger');
+    const allowSubdomainsCheckbox = document.getElementById('allowSubdomains');
     const helpDiv = document.getElementById('help');
 
     document.querySelectorAll('[data-locale]').forEach(e => {
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         debugTriggerInput.value = '';
         traceTriggerInput.value = '';
         profileTriggerInput.value = '';
+        allowSubdomainsCheckbox.checked = false;
     });
 
     document.querySelector('button[type="submit"]').addEventListener('click', e => {
@@ -21,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         chrome.storage.local.set({
             xdebugDebugTrigger: debugTriggerInput.value,
             xdebugTraceTrigger: traceTriggerInput.value,
-            xdebugProfileTrigger: profileTriggerInput.value
+            xdebugProfileTrigger: profileTriggerInput.value,
+            allowSubdomains: allowSubdomainsCheckbox.checked
         });
         optionsForm.classList.add('success');
         setTimeout(() => optionsForm.classList.remove('success'), 1500);
@@ -31,10 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
         xdebugDebugTrigger: 'YOUR-NAME',
         xdebugTraceTrigger: null,
         xdebugProfileTrigger: null,
+        allowSubdomains: false
     }, (settings) => {
         debugTriggerInput.value = settings.xdebugDebugTrigger;
         traceTriggerInput.value = settings.xdebugTraceTrigger;
         profileTriggerInput.value = settings.xdebugProfileTrigger;
+        allowSubdomainsCheckbox.checked = settings.allowSubdomains;
     });
 
     chrome.commands.getAll((commands) => {

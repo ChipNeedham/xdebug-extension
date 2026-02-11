@@ -20,6 +20,9 @@
   "options_save": {
     "message": "Save"
   },
+  "options_allow_subdomains": {
+    "message": "Allow subdomains (sets cookie domain to .example.com)"
+  },
   "options_shortcuts": {
     "message": "Shortcuts"
   },
